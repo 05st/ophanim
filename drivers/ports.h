@@ -3,10 +3,10 @@
 
 #include "../cpu/types.h"
 
-void outb(u16 port, u8 data);
-unsigned char inb(u16 port);
+void outb(uint16_t port, uint8_t data);
+unsigned char inb(uint16_t port);
 
-void outw(u16 port, u16 data);
-unsigned short inw(u16 port);
+void outw(uint16_t port, uint16_t data);
+unsigned short inw(uint16_t port);
 
 #endif
