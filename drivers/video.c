@@ -24,6 +24,7 @@ int outchar(char c, int offset, char attr) {
 
     if (c == '\n') {
         offset += MAX_COLS * 2;
+        offset -= offset % MAX_COLS;
     } else {
         vmem[offset] = c;
         vmem[offset + 1] = attr;
@@ -48,5 +49,15 @@ int get_cursor() {
     outb(REG_SCR_CTRL, 15);
     offset += inb(REG_SCR_DATA);
     return offset * 2;
+}
+
+void clrscr() {
+    int size = MAX_COLS * MAX_ROWS;
+    char* vmem = (char*)VIDEO_ADDR;
+    for (int i = 0; i < size; i++) {
+        vmem[i * 2] = ' ';
+        vmem[i * 2 + 1] = WHITE_ON_BLACK;
+    }
+    set_cursor(0);
 }
 
