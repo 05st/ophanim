@@ -31,6 +31,10 @@ int outchar(char c, int offset, char attr) {
         offset += 2;
     }
 
+    if (offset >= MAX_COLS * MAX_ROWS * 2) {
+        // scroll
+    }
+
     set_cursor(offset);
     return offset;
 }

@@ -1,3 +1,6 @@
+#ifndef VIDEO_H
+#define VIDEO_H
+
 #define WHITE_ON_BLACK 0x0f
 #define RED_ON_BLACK 0x04
 
@@ -13,3 +16,4 @@ void kprint_at(char* msg, int col, int row);
 void kprint(char* msg);
 void clrscr();
 
+#endif

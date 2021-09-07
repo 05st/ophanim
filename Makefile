@@ -9,7 +9,7 @@ os.bin: boot/boot.bin kernel.bin
 	cat $^ > $@
 
 kernel.bin: kernel/entry.o ${OBJ}
-	i686-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
+	i686-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary -e main
 
 %.o: %.c ${HEADERS}
 	${CC} -ffreestanding -c $< -o $@
