@@ -6,6 +6,11 @@ int main() {
     clrscr();
     kprint("after clearing\nda screen");
 
+    for (int i = 0; i < 24; i++) {
+        kprint("test\n");
+    }
+    kprint("gonna scroll now");
+
     return 0;
 }
 
