@@ -1,20 +1,21 @@
-void outb(unsigned short port, unsigned char data) {
+#include "ports.h"
+
+void outb(u16 port, u8 data) {
     __asm__("out %%al, %%dx" : : "a" (data), "d" (port));
 }
 
-unsigned char inb(unsigned short port) {
-    unsigned char res;
+u8 inb(u16 port) {
+    u8 res;
     __asm__("in %%dx, %%al" : "=a" (res) : "d" (port));
     return res;
 }
 
-void outw(unsigned short port, unsigned short data) {
+void outw(u16 port, u16 data) {
     __asm__("out %%ax, %%dx" : : "a" (data), "d" (port));
 }
 
-unsigned short inw(unsigned short port) {
-    unsigned short res;
+u16 inw(u16 port) {
+    u16 res;
     __asm__("in %%dx, %%ax" : "=a" (res) : "d" (port));
     return res;
 }
-

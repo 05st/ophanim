@@ -34,10 +34,12 @@ int outchar(char c, int offset, char attr) {
 
     if (offset >= MAX_COLS * MAX_ROWS * 2) {
         for (int i = 1; i < MAX_ROWS; i++) {
-            memcpy(2 * (i - 1) * MAX_COLS + VIDEO_ADDR, 2 * i * MAX_COLS + VIDEO_ADDR, MAX_COLS * 2);
+            char* src = (char*)(2 * i * MAX_COLS + VIDEO_ADDR);
+            char* dest = (char*)(2 * (i - 1) * MAX_COLS + VIDEO_ADDR);
+            memcpy(dest, src, MAX_COLS * 2);
         }
 
-        char* blank = 2 * (MAX_ROWS - 1);
+        char* blank = (char*)(2 * (MAX_ROWS - 1));
         for (int i = 0; i < MAX_COLS; i++) blank[i] = 0;
 
         offset -= 2 * MAX_COLS;
