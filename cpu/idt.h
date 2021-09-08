@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define KERNEL_CS 0x08
+
 typedef struct {
     uint16_t low_offset;
     uint16_t sel;

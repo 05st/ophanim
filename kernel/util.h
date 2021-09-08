@@ -3,4 +3,6 @@
 
 void memcpy(char* dest, char* src, int bytes);
 
+char* itoa(int value, char* str, int base);
+
 #endif
