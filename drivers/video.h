@@ -14,6 +14,7 @@
 
 void kprint_at(char* msg, int col, int row);
 void kprint(char* msg);
+void kprint_backspace();
 void clrscr();
 
 #endif

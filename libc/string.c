@@ -54,7 +54,8 @@ char* itoa(int value, char* str, int base) {
 }
 
 void backspace(char* str) {
-    str[strlen(str)] = '\0';
+    int len = strlen(str);
+    str[len - 1] = '\0';
 }
 
 void append(char* str, char c) {
