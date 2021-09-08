@@ -1,10 +1,6 @@
-void memcpy(char* dest, char* src, int bytes) {
-    for (int i = 0; i < bytes; i++) {
-        *(dest + i) = *(src + i);
-    }
-}
+#include "string.h"
 
-unsigned long strlen(const char* string) {
+int strlen(const char* string) {
     int length = 0;
 
     while(string[length] != '\0') {
@@ -14,7 +10,7 @@ unsigned long strlen(const char* string) {
     return length;
 }
 
-char* strrev(char* str) {
+char* reverse(char* str) {
     int index;
     int length = strlen(str);
     int midpoint = length / 2;
@@ -54,5 +50,5 @@ char* itoa(int value, char* str, int base) {
     if (neg) str[i++] = '-';
     str[i] = '\0';
 
-    return strrev(str);
+    return reverse(str);
 }

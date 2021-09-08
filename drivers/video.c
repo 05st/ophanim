@@ -1,6 +1,6 @@
 #include "video.h"
 #include "ports.h"
-#include "../kernel/util.h"
+#include "../libc/mem.h"
 
 int outchar(char c, int offset, char attr);
 void set_cursor(int offset);
