@@ -4,6 +4,32 @@ void memcpy(char* dest, char* src, int bytes) {
     }
 }
 
+unsigned long strlen(const char* string) {
+    int length = 0;
+
+    while(string[length] != '\0') {
+        length++;
+    }
+
+    return length;
+}
+
+char* strrev(char* str) {
+    int index;
+    int length = strlen(str);
+    int midpoint = length / 2;
+
+    for(index = 0; index < midpoint; index++) {
+        char left = str[index];
+        char right = str[length - 1 - index];
+
+        str[index] = right;
+        str[length - 1 - index] = left;
+    }
+
+    return str;
+}
+
 char* itoa(int value, char* str, int base) {
     int i = 0;
     char neg = 0;
@@ -28,5 +54,5 @@ char* itoa(int value, char* str, int base) {
     if (neg) str[i++] = '-';
     str[i] = '\0';
 
-    return str;
+    return strrev(str);
 }

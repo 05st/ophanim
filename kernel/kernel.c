@@ -1,15 +1,10 @@
 #include "../drivers/video.h"
 
 int main() {
-    kprint("test");
-    kprint_at("hello", 10, 10);
-    clrscr();
-    kprint("after clearing\nda screen");
+    isr_install();
 
-    for (int i = 0; i < 24; i++) {
-        kprint("test\n");
-    }
-    kprint("gonna scroll now");
+    asm volatile("sti");
+    init_timer(1);
 
     return 0;
 }
