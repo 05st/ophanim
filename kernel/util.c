@@ -6,7 +6,7 @@ void memcpy(char* dest, char* src, int bytes) {
 
 char* itoa(int value, char* str, int base) {
     int i = 0;
-    bool neg = false;
+    char neg = 0;
 
     if (value == 0) {
         str[i++] = '0';
@@ -14,15 +14,15 @@ char* itoa(int value, char* str, int base) {
         return str;
     }
     
-    if (num < 0 && base == 10) {
-        neg = true;
-        num = -num;
+    if (value < 0 && base == 10) {
+        value = 1;
+        value = -value;
     }
 
-    while (num != 0) {
-        int rem = num % base;
+    while (value != 0) {
+        int rem = value % base;
         str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
-        num /= base;
+        value /= base;
     }
 
     if (neg) str[i++] = '-';
