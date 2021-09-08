@@ -39,8 +39,11 @@ int outchar(char c, int offset, char attr) {
             memcpy(dest, src, MAX_COLS * 2);
         }
 
-        char* blank = (char*)(2 * (MAX_ROWS - 1));
-        for (int i = 0; i < MAX_COLS; i++) blank[i] = 0;
+        char* blank = (char*)(VIDEO_ADDR + MAX_COLS * (MAX_ROWS - 1) * 2);
+        for (int i = 0; i < MAX_COLS; i+=2) {
+            blank[i] = ' ';
+            blank[i + 1] = WHITE_ON_BLACK;
+        }
 
         offset -= 2 * MAX_COLS;
     }
