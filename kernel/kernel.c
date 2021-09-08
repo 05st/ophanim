@@ -1,12 +1,9 @@
 #include "../drivers/video.h"
+#include "../cpu/isr.h"
 
-int main() {
+int kmain() {
     isr_install();
-
-    asm volatile("sti");
-    //init_timer(1);
-    init_keyboard();
+    irq_install();
 
     return 0;
 }
-

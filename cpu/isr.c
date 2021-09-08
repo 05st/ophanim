@@ -1,8 +1,10 @@
 #include "isr.h"
 #include "idt.h"
 #include "../drivers/video.h"
-#include "../libc/string.h"
+#include "../drivers/keyboard.h"
 #include "../drivers/ports.h"
+#include "timer.h"
+#include "../libc/string.h"
 
 isr_t interrupt_handlers[256];
 
@@ -105,13 +107,13 @@ char *exception_messages[] = {
     "Reserved"
 };
 
-void isr_handler(registers_t r) {
+void isr_handler(registers_t* r) {
     kprint("Received Interrupt: ");
     char s[3];
-    itoa(r.int_no, s, 10);
+    itoa(r->int_no, s, 10);
     kprint(s);
     kprint("\n");
-    kprint(exception_messages[r.int_no]);
+    kprint(exception_messages[r->int_no]);
     kprint("\n");
 }
 
@@ -119,12 +121,18 @@ void register_interrupt_handler(uint8_t n, isr_t handler) {
     interrupt_handlers[n] = handler;
 }
 
-void irq_handler(registers_t r) {
-    if (r.int_no >= 40) outb(0xA0, 0x20);
+void irq_handler(registers_t* r) {
+    if (r->int_no >= 40) outb(0xA0, 0x20);
     outb(0x20, 0x20);
 
-    if (interrupt_handlers[r.int_no] != 0) {
-        isr_t handler = interrupt_handlers[r.int_no];
+    if (interrupt_handlers[r->int_no] != 0) {
+        isr_t handler = interrupt_handlers[r->int_no];
         handler(r);
     }
+}
+
+void irq_install() {
+    asm volatile("sti");
+    init_timer(50);
+    init_keyboard();
 }

@@ -6,13 +6,8 @@
 
 uint32_t tick = 0;
 
-static void timer_callback(registers_t regs) {
+static void timer_callback(registers_t* regs) {
     tick++;
-    kprint("Ur Mom Is This Fat: ");
-    char tick_ascii[256];
-    itoa(tick, tick_ascii, 16);
-    kprint(tick_ascii);
-    kprint("\n");
 }
 
 void init_timer(uint32_t freq) {

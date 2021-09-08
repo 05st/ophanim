@@ -5,14 +5,16 @@ OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 
 CC = /usr/local/cross/bin/i686-elf-gcc
 
+CFLAGS = -ffreestanding -m32
+
 os.bin: boot/boot.bin kernel.bin
 	cat $^ > $@
 
 kernel.bin: kernel/entry.o ${OBJ}
-	i686-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary -e main
+	i686-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
 
 %.o: %.c ${HEADERS}
-	${CC} -ffreestanding -c $< -o $@
+	${CC} ${CFLAGS} -c $< -o $@
 
 %.o: %.asm
 	nasm $< -f elf -o $@

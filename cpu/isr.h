@@ -1,7 +1,7 @@
 #ifndef ISR_H
 #define ISR_H
 
-#include "types.h"
+#include <stdint.h>
 #include "idt.h"
 
 extern void isr0();
@@ -73,15 +73,16 @@ extern void irq15();
 
 typedef struct {
     uint32_t ds;
-    uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+    uint32_t edi, esi, ebp, useless, ebx, edx, ecx, eax;
     uint32_t int_no, err_code;
-    uint32_t eip, cs, eflags, useresp, ss;
+    uint32_t eip, cs, eflags, esp, ss;
 } registers_t;
 
 void isr_install();
-void isr_handler(registers_t r);
+void isr_handler(registers_t* r);
+void irq_install();
 
-typedef void (*isr_t)(register_t);
+typedef void (*isr_t)(registers_t*);
 void register_interrupt_handler(uint8_t n, isr_t handler);
 
 #endif
