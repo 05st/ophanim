@@ -1,6 +1,6 @@
 #include "string.h"
 
-int strlen(const char* string) {
+int strlen(char* string) {
     int length = 0;
 
     while(string[length] != '\0') {
@@ -51,4 +51,22 @@ char* itoa(int value, char* str, int base) {
     str[i] = '\0';
 
     return reverse(str);
+}
+
+void backspace(char* str) {
+    str[strlen(str)] = '\0';
+}
+
+void append(char* str, char c) {
+    int len = strlen(str);
+    str[len] = c;
+    str[len + 1] = '\0';
+}
+
+int strcmp(char* s1, char* s2) {
+    int i;
+    for (i = 0; s1[i] == s2[i]; i++) {
+        if (s1[i] == '\0') return 0;
+    }
+    return s1[i] - s2[i]; 
 }

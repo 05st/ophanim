@@ -2,6 +2,7 @@
 #include "ports.h"
 #include "video.h"
 #include "../cpu/isr.h"
+#include "../libc/string.h"
 
 #define BACKSPACE 0x0E
 #define ENTER 0x1C
@@ -24,7 +25,21 @@ const char sc_ascii[] = { '?', '?', '1', '2', '3', '4', '5', '6',
 static void keyboard_callback(registers_t* regs) {
     uint8_t scancode = inb(0x60);
     char* ascii;
-    kprint(itoa(scancode, ascii, 16));
+
+    if (scancode > SC_MAX) return;
+    if (scancode == BACKSPACE) {
+        backspace(key_buffer);
+        kprint_backspace();
+    } else if (scancode == ENTER) {
+        kprint("\n");
+        handle_input(key_buffer);
+        key_buffer[0] = '\0';
+    } else {
+        char letter = sc_ascii[(int)scancode];
+        char str[2] = {letter, '\0'};
+        append(key_buffer, letter);
+        kprint(str);
+    }
 }
 
 void init_keyboard() {

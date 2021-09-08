@@ -20,12 +20,20 @@ void kprint(char* msg) {
     kprint_at(msg, col, row);
 }
 
+void kprint_backspace() {
+    int offset = get_cursor()-2;
+    outchar(0x08, offset, WHITE_ON_BLACK);
+}
+
 int outchar(char c, int offset, char attr) {
     char* vmem = (char*)VIDEO_ADDR;
 
     if (c == '\n') {
         offset += MAX_COLS * 2;
         offset -= offset % MAX_COLS;
+    } else if (c == 0x08) { // Backspace
+        vmem[offset] = ' ';
+        vmem[offset+1] = attr;
     } else {
         vmem[offset] = c;
         vmem[offset + 1] = attr;
