@@ -245,7 +245,7 @@ isr26:
 ; 27 Reserved
 isr27:
     cli
-    pushbyte 0
+    push byte 0
     push byte 27
     jmp isr_common_stub
 

@@ -2,6 +2,7 @@
 #define ISR_H
 
 #include "types.h"
+#include "idt.h"
 
 extern void isr0();
 extern void isr1();
