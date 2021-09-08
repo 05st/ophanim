@@ -25,5 +25,5 @@ run: os.bin
 
 clean:
 	rm -rf *.bin *.o
-	rm -rf kernel/*.o drivers/*.o boot/*.bin cpu/*.o
+	rm -rf kernel/*.o drivers/*.o boot/*.bin cpu/*.o libc/*.o
 
