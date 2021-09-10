@@ -37,7 +37,7 @@ char* itoa(int value, char* str, int base) {
     }
     
     if (value < 0 && base == 10) {
-        value = 1;
+        neg = 1;
         value = -value;
     }
 
@@ -51,6 +51,17 @@ char* itoa(int value, char* str, int base) {
     str[i] = '\0';
 
     return reverse(str);
+}
+
+int oct_to_bin(char* oct_str, int size) {
+    int n = 0;
+    char* c = oct_str;
+    while (size-- > 0) {
+        n *= 8;
+        n += *c - '0';
+        c++;
+    }
+    return n;
 }
 
 void backspace(char* str) {

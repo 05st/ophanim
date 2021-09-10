@@ -6,6 +6,14 @@ void memcpy(char* dest, char* src, int bytes) {
     }
 }
 
+int memcmp(char* ptr1, char* ptr2, int bytes) {
+    int i;
+    for (i = 0; ptr1[i] == ptr2[i]; i++) {
+        if (i == bytes - 1) return 0;
+    }
+    return ptr1[i] - ptr2[i];
+}
+
 uint32_t free_mem_addr = 0x10000;
 
 uint32_t kmalloc(uint32_t size, int align, uint32_t* addr) {
